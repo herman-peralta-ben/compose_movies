@@ -5,4 +5,8 @@ plugins {
     //region Dagger - Hilt
     id("com.google.dagger.hilt.android") version "2.48" apply false
     //endregion Dagger - Hilt
+
+    //region Ktor
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.7.20" apply false
+    //endregion Ktor
 }

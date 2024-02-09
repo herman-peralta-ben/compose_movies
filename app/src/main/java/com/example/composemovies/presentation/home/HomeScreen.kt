@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
@@ -62,18 +62,14 @@ private fun HomeContentComposable(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = "Popular Movies",
-        )
+        Button(onClick = onClick) {
+            Text(text = "Get Popular Movies")
+        }
 
-        LazyRow {
+        LazyColumn {
             items(content.popularMovies) { item ->
                 PopularMovieItemComposable(movie = item)
             }
-        }
-
-        Button(onClick = onClick) {
-            Text(text = "Get Popular Movies")
         }
     }
 }

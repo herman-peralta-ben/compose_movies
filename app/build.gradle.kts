@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +8,10 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     //endregion Dagger - Hilt
+
+    //region Ktor
+    id("org.jetbrains.kotlin.plugin.serialization")
+    //endregion Ktor
 }
 
 android {
@@ -12,6 +19,13 @@ android {
     compileSdk = 34
 
     defaultConfig {
+
+        val secureProps = Properties()
+        val securePropsFile = rootProject.file("secure.properties")
+        if (securePropsFile.exists()) secureProps.load(FileInputStream(securePropsFile))
+
+        resValue("string", "api_key", (secureProps.getProperty("API_KEY") ?: ""))
+
         applicationId = "com.example.composemovies"
         minSdk = 24
         targetSdk = 34
@@ -55,6 +69,7 @@ android {
 
 dependencies {
     val hiltVersion = "2.48"
+    val ktorVersion = "1.5.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -72,6 +87,12 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     //endregion Dagger - Hilt
+
+    //region Ktor
+    implementation("io.ktor:ktor-client-android:$ktorVersion")
+    implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+    implementation("io.ktor:ktor-client-logging-jvm:$ktorVersion")
+    //endregion Ktor
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

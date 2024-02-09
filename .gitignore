@@ -1,3 +1,5 @@
+secure.properties
+
 # Gradle files
 .gradle/
 build/
