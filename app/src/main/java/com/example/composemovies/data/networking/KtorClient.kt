@@ -57,6 +57,9 @@ class KtorClient @Inject constructor(
         install(DefaultRequest) {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
             // https://www.themoviedb.org/settings/api
+            // TODO pass Bearer Token
+            // header(HttpHeaders.Authorization, "Bearer ey...")
+
             // https://www.linkedin.com/pulse/how-hide-protect-api-keys-your-android-app-oleksii-sylichenko
             // TODO getting TMDB api key, create a secure.properties file in the project root, store it there as API_KEY=MY_API_KEY
             parameter("api_key", context.getString(R.string.api_key))
